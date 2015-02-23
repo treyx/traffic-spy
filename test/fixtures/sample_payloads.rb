@@ -1,4 +1,16 @@
 module SamplePayloads
+
+  def payload_dissemination(user, params)
+    payload = user.payloads.create()
+    binding.pry
+    payload.events.create({eventName: params["eventName"]})
+    payload.requestedAts.create({requestedAt: params["requestedAt"]})
+    payload.respondedIns.create({respondedIn: params["respondedIn"]})
+    payload.refferedBies.create({refferedBy: params["refferedBy"]})
+    payload.resolutions.create({resolutionWidth: params["resolutionWidth"], resolutionHeight: params["resolutionHeigth"]})
+    payload.ips.create({ip: params["ip"]})
+  end
+
   def populate
     sample_user = User.create({"identifier" => "jumpstartlab",
           "rootUrl" => "http://jumpstartlab.com"})
@@ -50,5 +62,9 @@ module SamplePayloads
            "resolutionHeight" => "1900",
            "ip"               => "61.99.18.911"
            })
+  payload_dissemination(sample_user, payload1)
+  payload_dissemination(sample_user, payload2)
+  payload_dissemination(sample_user, payload3)
+  payload_dissemination(sample_user, payload4)
   end
 end
